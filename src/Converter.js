@@ -36,7 +36,8 @@ class CSV_Converter extends Converter{
 }
 
 export class DepenceToWYG extends CSV_Converter{
-  static fileName = "DepenceToWYG.csv";
+  static converter_name = "DepenceToWYG";
+  static fileName = this.converter_name + ".csv";
   static mimeType = "text/csv;encoding:utf-8";
 
   static dataIsCompatible(input_text){
@@ -57,7 +58,7 @@ export class DepenceToWYG extends CSV_Converter{
 
     for(const property of required_properties){
       if(!(property in typical_line)){
-        console.warn("At least `" + property + "` property is missing for Depence To MA conversion.");
+        console.warn("At least `" + property + "` property is missing for " + this.converter_name + " conversion.");
         return false;
       }
     }
