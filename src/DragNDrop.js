@@ -40,7 +40,7 @@ export function handleFileSelection(evt) {
 
     default:
       addError("The file is not a known file type.")
-
+      console.warn("The file is of type `" + file.type + "` which is not compatible. ");
   }
 }
 
