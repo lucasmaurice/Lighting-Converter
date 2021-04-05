@@ -70,7 +70,7 @@ class CSV_Converter extends Converter{
 }
 
 export class DepenceToWYG extends CSV_Converter{
-  static converterName = "DepenceToWYG";
+  static converterName = "Depence2ToWYG";
   static fileName = this.converterName + ".csv";
   
   static required_properties = [
@@ -125,7 +125,7 @@ export class DepenceToWYG extends CSV_Converter{
 }
 
 export class WYGToDepence extends CSV_Converter{
-  static converterName = "WYGToDepence";
+  static converterName = "WYGToDepence2";
   static fileName = this.converterName + ".xml";
 
   static required_properties = [
