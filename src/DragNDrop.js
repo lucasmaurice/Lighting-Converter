@@ -1,7 +1,8 @@
-import { DepenceToWYG } from './Converter.js';
+import { WYGToDepence, DepenceToWYG } from './Converter.js';
 
 let availlable_converters = [
-  DepenceToWYG
+  DepenceToWYG,
+  WYGToDepence
 ]
 
 export function handleFiles(theFiles){

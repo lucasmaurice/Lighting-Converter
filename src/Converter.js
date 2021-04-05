@@ -71,7 +71,8 @@ class CSV_Converter extends Converter{
 
 export class DepenceToWYG extends CSV_Converter{
   static converterName = "DepenceToWYG";
-
+  static fileName = this.converterName + ".csv";
+  
   static required_properties = [
     "Fixture ID",
     "DMX Line",
@@ -119,6 +120,68 @@ export class DepenceToWYG extends CSV_Converter{
         "," +"," +"," +"," +"," +"," +"," +"\n"
     }
 
+    return out_data;
+  }
+}
+
+export class WYGToDepence extends CSV_Converter{
+  static converterName = "WYGToDepence";
+  static fileName = this.converterName + ".xml";
+
+  static required_properties = [
+    "Spot",
+    "Type",
+    "Fixture Options",
+    "Patch Universe",
+    "Patch Address",
+    "# of Data Channels",
+    "X",
+    "Y",
+    "Z",
+    "RotX",
+    "RotY",
+    "RotZ",
+  ];
+
+  static convert(input_text){
+    let in_data = this.parse(input_text);
+    let out_data = `<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="styles/fixture+layer+layers@csv.xsl" alternate="yes"?>
+<MA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.malighting.de/grandma2/xml/MA" xsi:schemaLocation="http://schemas.malighting.de/grandma2/xml/MA http://schemas.malighting.de/grandma2/xml/3.9.60/MA.xsd" major_vers="3" minor_vers="9" stream_vers="60">
+  <Info datetime="2021-04-05T13:33:41" showfile="easy patch pour Sonic" />
+  <Layer index="1" name="Lighting Converter">`;
+    
+    let index = 0;
+    for(const fixture of in_data){
+      index ++;
+      let address = Number(fixture["Patch Universe"] - 1)*512 + Number(fixture["Patch Address"]);
+
+      out_data += `
+    <Fixture index="` + index + `" name="` + fixture["Type"] + " " + index + `" fixture_id="` + fixture["Spot"] + `">
+      <FixtureType name="` + fixture["Type"] + " " + fixture["Fixture Options"] +`">
+        <No>3</No>
+      </FixtureType>
+      <SubFixture index="0">
+        <Patch>
+          <Address>` + address + `</Address>
+        </Patch>
+        <AbsolutePosition>
+          <Location x="` + fixture["X"].split("m")[0] + `" y="` + fixture["Y"].split("m")[0] + `" z="` + fixture["Z"].split("m")[0] + `" />
+          <Rotation x="` + fixture["RotX"] + `" y="` + (Number(fixture["RotY"]) + 180) + `" z="` + fixture["RotZ"] + `" />
+          <Scaling x="1" y="1" z="1" />
+        </AbsolutePosition>`;
+      
+      for(let channel_index = 0; channel_index < Number(fixture["# of Data Channels"]); channel_index++){
+        out_data += `\n        <Channel index="` + channel_index + `" />`;
+      }
+      out_data += `
+      </SubFixture>
+    </Fixture>`;
+      index ++;
+    }
+    out_data += `
+  </Layer>
+</MA>\n`;
     return out_data;
   }
 }
