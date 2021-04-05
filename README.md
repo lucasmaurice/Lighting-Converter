@@ -32,7 +32,7 @@ You could also decide to use WYG2MA to create MA2 macros, patch your board and t
 Also, there is an issue introduced by the MA2 software on the rotation of the *Y axis* (Z axis in Depence2) when importing fixtures, they are all mirrored 180deg. But if you use this converter and bypass the MA2 software the fixtures rotation is accurate and no additional action is required.
 
 ## Contribution
-Feel free to open new pull request with new converter features, or to ask for new conversions by [pening an issue](https://github.com/lucasmaurice/Lighting-Patch-Converter/issues)! 
+Feel free to open new pull request with new converter features, or to ask for new converters by [opening an issue](https://github.com/lucasmaurice/Lighting-Patch-Converter/issues)! 
 
 ## Credits
 Special thanks to MATTHIAS SCHÖFFMANN for his awesome [WYG2MA](https://www.mschoeffmann.com/tools/wyg2gma-converter/) application!
