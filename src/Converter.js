@@ -23,13 +23,13 @@ class Converter {
     throw new Error('You must implement this function');
   }
 
-  static download_link(input_text){
+  static download_link(input_text, fileName){
     let content = this.convert(input_text);
 
     let a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([content], { type: this.mimeType }));
-    a.setAttribute('download', this.fileName);
-    a.innerText = "Download " + this.fileName
+    a.setAttribute('download', fileName + "_" + this.fileName);
+    a.innerText = "Download " + fileName + "_" + this.fileName;
 
     return a;
   }
