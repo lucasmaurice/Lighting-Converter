@@ -1,4 +1,4 @@
-import { handleFileSelection } from './DragNDrop.js';
+import { handleFiles } from './DragNDrop.js';
 
 // Check browser compatibilities
 if (!window.FileReader) {
@@ -10,10 +10,28 @@ if (!window.FileReader) {
 } else {
   // Set up the file drag and drop listeners:         
   document.getElementById('fileDropBox').addEventListener('dragover', handleDragOver, false);
-  document.getElementById('fileDropBox').addEventListener('drop', handleFileSelection, false);
+  document.getElementById('fileDropBox').addEventListener('drop', handleFileDrop, false);
 }
+
+document.getElementById('fileSelection').addEventListener('change', handleFileSelection, false);
 
 function handleDragOver(evt) {
   evt.stopPropagation(); // Do not allow the dragover event to bubble.
   evt.preventDefault(); // Prevent default dragover event behavior.
+}
+
+function handleFileDrop(evt) {
+  resetError()
+  evt.stopPropagation(); // Do not allow the drop event to bubble.
+  evt.preventDefault(); // Prevent default drop event behavior.
+
+  handleFiles(evt.dataTransfer.files); // Grab the list of files dragged to the drop box.
+}
+
+function resetError(){
+  document.getElementById("fileDropBoxMessage").innerHTML = "";
+}
+
+function handleFileSelection(){
+  handleFiles(this.files);
 }
