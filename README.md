@@ -25,7 +25,7 @@ Meanwhile, you can use this converter which takes the csv output from the all da
 Once processed, just import it in Depence2 in *File>Import>Import Patch from grand MA* and match the corresponding fixtures with modes and voila! 
 
 **NOTE:**
-Make sure to be in **metric** mode in WYSIWYG before exporting the CSV as it will result in errors if otherwise.
+Make sure to be in **metric** mode in WYSIWYG before exporting the CSV as it will result in errors if otherwise. Also make sure all your fixtures have a position assigned to them, floor by default works, otherwise you might not get any result while importing in depence.
 
 You could also decide to use WYG2MA to create MA2 macros, patch your board and then export the patch into Depence2. However, using this method is longer especially if you just want to quickly insert fixtures and render a still frame without connecting a board.
 
